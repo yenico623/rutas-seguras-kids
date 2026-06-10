@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rutas Seguras Kids</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Rutas Seguras Kids</h1>
+        <p>Sistema de gestión de rutas escolares</p>
+
+    </header>
+
+    <main>
+        <section id="formulario-section">
+            <h2>Nueva Ruta</h2>
+            <form id="ruta-form">
+                <input type="text" id="input-nombre" placeholder="Nombre de la ruta">
+                <input type="text" id="input-conductor" placeholder="Nombre del conductor "> 
+                <input type="time" id="input-hora">
+                <input type="text" id="input-ciudad" placeholder="Ciudad">
+                <button type="button" id="btn-agregar-ruta">Agregar Ruta</button>
+            </form>
+        </section>
+
+        <section id="rutas-section">
+            <h2>Rutas Registradas</h2>
+            <div id="rutas-container">
+
+            </div>
+        </section>
+
+        <section id="clima-section">
+            <h2>Clima en tu ciudad</h2>
+            <div id="clima-container">
+
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <script src="js/components/route-card.js"></script>
+        <script src="js/services/weatherService.js"></script>
+        <script src="js/app.js"></script>
+    </footer>
+
+
+    
+</body>
+</html>
