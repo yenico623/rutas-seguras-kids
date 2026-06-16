@@ -25,7 +25,7 @@ El proyecto fue desarrollado sin frameworks ni librerías externas, con el objet
 
 # Instruciones de Ejecución
 1. Clona el repositorio:
-   git clone https://github.com/tu-usuario/rutas-seguras-kids.git
+   git clone https://github.com/yenico623/rutas-seguras-kids.git
 
 2. Entra en la carpeta del proyecto
    cd rutas-seguras-kids
