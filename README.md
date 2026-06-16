@@ -49,7 +49,7 @@ El proyecto fue desarrollado sin frameworks ni librerías externas, con el objet
 
 
 ## API utilizada
-**OpenWeatherMap — https://api.openweathermap.org/data/2.5/weather**
+**OpenWeatherMap — [https://api.openweathermap.org/data/2.5/weather](https://openweathermap.org/)**
 
 Retorna temperatura en °C y descripción del clima para la ciudad ingresada en cada ruta. Se consume con fetch y async/await dentro de weatherService.js.
 
