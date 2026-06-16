@@ -7,6 +7,7 @@ Rutas Seguras Kids es una aplicación web que permite a la empresa del mismo nom
 El proyecto fue desarrollado sin frameworks ni librerías externas, con el objetivo de demostrar dominio de manipulación del DOM, eventos personalizados, asincronía, Web Components y diseño responsivo.
 
 ## Estructura del Proyecto
+\`\`\`
 rutas-seguras-kids/
 ├── index.html
 ├── css/
@@ -20,6 +21,7 @@ rutas-seguras-kids/
 ├── img/
 │   └── logop.png
 └── README.md
+\`\`\`
 
 ## Funcionalidades
 - Crear, editar y eliminar rutas escolares (nombre, conductor, hora de salida, ciudad)
