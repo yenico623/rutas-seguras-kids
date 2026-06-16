@@ -7,7 +7,7 @@ async function obtenerClima(ciudad) {
         );
 
         if (!respuesta.ok) {
-            return "🌍 Ciudad no encontrada";
+            return "Ciudad no encontrada";
         }
 
         const datos = await respuesta.json();
@@ -17,6 +17,6 @@ async function obtenerClima(ciudad) {
         return `🌤 ${temperatura}°C - ${descripcion}`;
 
     } catch (error) {
-        return "⚠️ Error al obtener el clima";
+        return "Error al obtener el clima";
     }
 }
