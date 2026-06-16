@@ -10,18 +10,18 @@ El proyecto fue desarrollado sin frameworks ni librerías externas, con el objet
 
 \`\`\`
 rutas-seguras-kids/
-├── index.html
-├── css/
-│   └── style.css
-├── js/
-│   ├── app.js
-│   ├── components/
-│   │   └── route-card.js
-│   └── services/
-│       └── weatherService.js
-├── img/
-│   └── logop.png
-└── README.md
+   index.html
+    css/
+       style.css
+   js/
+      app.js
+      components/
+         route-card.js
+         services/
+            weatherService.js
+      img/
+         logop.png
+      README.md
 \`\`\`
 
 ## Funcionalidades
