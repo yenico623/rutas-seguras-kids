@@ -1,5 +1,6 @@
 let rutas = JSON.parse(localStorage.getItem("rutas")) || [];
 let contadorId = JSON.parse(localStorage.getItem("contadorId")) || 1;
+let filtroActual = "todas";
 
 const contenedorRutas = document.getElementById("contenedor-rutas");
 const btnAgregarRuta = document.getElementById("btn-agregar-ruta");
@@ -66,6 +67,24 @@ function renderizarRutas(lista) {
 
 function mostrarRutas() {
     renderizarRutas(rutas);
+}
+
+function aplicarFiltros() {
+    const termino = document.getElementById("buscador").value.trim().toLowerCase();
+    let filtradas = rutas;
+
+    if (filtroActual !== "todas") {
+        filtradas = filtradas.filter(r => r.estado === filtroActual);
+    }
+
+    if (termino !== "") {
+        filtradas = filtradas.filter(r =>
+            r.nombre.toLowerCase().includes(termino) ||
+            r.ciudad.toLowerCase().includes(termino)
+        );
+    }
+
+    renderizarRutas(filtradas);
 }
 
 function crearRuta(nombre, conductor, hora, ciudad) {
@@ -152,12 +171,17 @@ btnAgregarRuta.addEventListener("click", () => {
     inputCiudad.value = "";
 });
 
-document.getElementById("buscador").addEventListener("input", (e) => {
-    const termino = e.target.value.trim().toLowerCase();
-    const filtradas = rutas.filter(r => 
-    r.nombre.toLowerCase().includes(termino) ||
-    r.ciudad.toLowerCase().includes(termino));
-    renderizarRutas(filtradas);
+document.querySelectorAll(".btn-filtro").forEach(btn => {
+    btn.addEventListener("click", () => {
+        document.querySelectorAll(".btn-filtro").forEach(b => b.classList.remove("activo"));
+        btn.classList.add("activo");
+        filtroActual = btn.dataset.filtro;
+        aplicarFiltros();
+    });
+});
+
+document.getElementById("buscador").addEventListener("input", () => {
+    aplicarFiltros();
 });
 
 document.addEventListener("rutaCreada", (e) => {
