@@ -4,25 +4,7 @@ Sistema Frontend para la gestion de rutas escolares y asignacion de estuadiantes
 ## Descripción
 Rutas Seguras Kids es una aplicación web que permite a la empresa del mismo nombre organizar sus rutas escolares de forma dinámica. Desde la interfaz es posible crear rutas, asignar estudiantes, cambiar el estado de cada ruta y consultar el clima en tiempo real de la ciudad donde opera cada ruta.
 
-El proyecto fue desarrollado sin frameworks ni librerías externas, con el objetivo de demostrar dominio de manipulación del DOM, eventos personalizados, asincronía, Web Components y diseño responsivo.
-
-## Estructura del proyecto
-
-\`\`\`
-rutas-seguras-kids/
-   index.html
-    css/
-       style.css
-   js/
-      app.js
-      components/
-         route-card.js
-         services/
-            weatherService.js
-      img/
-         logop.png
-      README.md
-\`\`\`
+El proyecto fue desarrollado sin frameworks ni librerías externas, con el objetivo de demostrar dominio de manipulación del DOM, eventos personalizados, asincronía, Web Components y diseño responsivo
 
 ## Funcionalidades
 - Crear, editar y eliminar rutas escolares (nombre, conductor, hora de salida, ciudad)
