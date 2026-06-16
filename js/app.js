@@ -33,6 +33,10 @@ function mostrarRutas() {
         card.addEventListener("eliminarEstudiante", (e) => eliminarEstudiante(e.detail.idRuta, e.detail.idEstudiante));
 
         contenedorRutas.appendChild(card);
+
+        obtenerClima(ruta.ciudad).then(clima => {
+            card.actualizarClima(clima);
+        });
     });
 }
 
