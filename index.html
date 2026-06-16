@@ -9,8 +9,27 @@
 <body>
 
     <header>
-        <h1>Rutas Seguras Kids</h1>
-        <p>Sistema de gestión de rutas escolares</p>
+   
+    <div class="header-content">
+        <div class="header-logo">
+            <img src="img/logop.png" alt="Logo Rutas Seguras Kids" class="logo-img">
+            <div>
+                <h1>Rutas Seguras Kids</h1>
+                <p>Sistema de gestión de rutas escolares</p>
+            </div>
+        </div>
+        <div class="header-stats">
+            <div class="stat">
+                <span id="total-rutas">0</span>
+                <small>Rutas</small>
+            </div>
+            <div class="stat">
+                <span id="total-estudiantes">0</span>
+                <small>Estudiantes</small>
+            </div>
+        </div>
+    </div>
+
 
     </header>
 
@@ -28,25 +47,26 @@
 
         <section id="rutas-section">
             <h2>Rutas Registradas</h2>
+            <button class="btn-filtro activo" data-filtro="todas">Todas</button>
+            <button class="btn-filtro" data-filtro="pendiente">Pendiente</button>
+            <button class="btn-filtro" data-filtro="en-curso">En curso</button>
+            <button class="btn-filtro" data-filtro="finalizada">Finalizada</button>
+            <input type="text" id="buscador" placeholder="Buscar ruta...">
             <div id="contenedor-rutas">
-
-            </div>
-        </section>
-
-        <section id="clima-section">
-            <h2>Clima en tu ciudad</h2>
-            <div id="clima-container">
 
             </div>
         </section>
     </main>
 
- 
 
     <footer>
-        <p>© 2026 Rutas Seguras Kids</p>
-
+    <div class="footer-content">
+        <span class="footer-logo">Rutas Seguras Kids</span>
+        <span class="footer-copy">© 2026 Todos los derechos reservados</span>
+    </div>
     </footer>
+
+    
      <script src="js/components/route-card.js"></script>
     <script src="js/services/weatherService.js"></script>
     <script src="js/app.js"></script>

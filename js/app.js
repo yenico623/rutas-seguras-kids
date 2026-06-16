@@ -13,15 +13,31 @@ function guardarEnStorage() {
     localStorage.setItem("contadorId", JSON.stringify(contadorId));
 }
 
-function mostrarRutas() {
+function mostrarNotificacion(mensaje) {
+    const notif = document.createElement("div");
+    notif.className = "notificacion";
+    notif.textContent = mensaje;
+    document.body.appendChild(notif);
+    setTimeout(() => notif.remove(), 3000);
+}
+
+function actualizarEstadisticas() {
+    const totalRutas = rutas.length;
+    const totalEstudiantes = rutas.reduce((acc, ruta) => acc + ruta.estudiantes.length, 0);
+    document.getElementById("total-rutas").textContent = totalRutas;
+    document.getElementById("total-estudiantes").textContent = totalEstudiantes;
+}
+
+function renderizarRutas(lista) {
     contenedorRutas.innerHTML = "";
-    rutas.forEach(ruta => {
+    lista.forEach(ruta => {
         const card = document.createElement("route-card");
         card.setAttribute("ruta-id", ruta.id);
         card.setAttribute("nombre", ruta.nombre);
         card.setAttribute("conductor", ruta.conductor);
         card.setAttribute("hora", ruta.hora);
         card.setAttribute("ciudad", ruta.ciudad);
+        card.setAttribute("estado", ruta.estado || "pendiente");
 
         ruta.estudiantes.forEach(est => {
             card.agregarEstudianteALista(est.id, est.nombre);
@@ -31,6 +47,13 @@ function mostrarRutas() {
         card.addEventListener("editarRuta", (e) => editarRuta(e.detail.id));
         card.addEventListener("agregarEstudiante", (e) => agregarEstudiante(e.detail.idRuta, e.detail.nombre));
         card.addEventListener("eliminarEstudiante", (e) => eliminarEstudiante(e.detail.idRuta, e.detail.idEstudiante));
+        card.addEventListener("cambiarEstado", (e) => {
+            const ruta = rutas.find(r => r.id == e.detail.idRuta);
+            if (ruta) {
+                ruta.estado = e.detail.estado;
+                guardarEnStorage();
+            }
+        });
 
         contenedorRutas.appendChild(card);
 
@@ -38,6 +61,11 @@ function mostrarRutas() {
             card.actualizarClima(clima);
         });
     });
+    actualizarEstadisticas();
+}
+
+function mostrarRutas() {
+    renderizarRutas(rutas);
 }
 
 function crearRuta(nombre, conductor, hora, ciudad) {
@@ -47,11 +75,13 @@ function crearRuta(nombre, conductor, hora, ciudad) {
         conductor,
         hora,
         ciudad,
+        estado: "pendiente",
         estudiantes: []
     };
     rutas.push(nuevaRuta);
     guardarEnStorage();
     mostrarRutas();
+    mostrarNotificacion("Ruta creada exitosamente");
 
     document.dispatchEvent(new CustomEvent("rutaCreada", {
         detail: { nombre: nuevaRuta.nombre }
@@ -62,6 +92,7 @@ function eliminarRuta(id) {
     rutas = rutas.filter(r => r.id != id);
     guardarEnStorage();
     mostrarRutas();
+    mostrarNotificacion("Ruta eliminada");
 }
 
 function editarRuta(id) {
@@ -80,6 +111,7 @@ function editarRuta(id) {
         ruta.ciudad = nuevaCiudad;
         guardarEnStorage();
         mostrarRutas();
+        mostrarNotificacion("Ruta actualizada");
     }
 }
 
@@ -89,6 +121,7 @@ function agregarEstudiante(idRuta, nombre) {
     ruta.estudiantes.push({ id: Date.now(), nombre });
     guardarEnStorage();
     mostrarRutas();
+    mostrarNotificacion("Estudiante agregado");
 }
 
 function eliminarEstudiante(idRuta, idEstudiante) {
@@ -97,6 +130,7 @@ function eliminarEstudiante(idRuta, idEstudiante) {
     ruta.estudiantes = ruta.estudiantes.filter(e => e.id != idEstudiante);
     guardarEnStorage();
     mostrarRutas();
+    mostrarNotificacion("Estudiante eliminado");
 }
 
 btnAgregarRuta.addEventListener("click", () => {
@@ -106,7 +140,7 @@ btnAgregarRuta.addEventListener("click", () => {
     const ciudad = inputCiudad.value.trim();
 
     if (nombre === "" || conductor === "" || hora === "" || ciudad === "") {
-        alert("Por favor completa todos los campos");
+        mostrarNotificacion("Por favor completa todos los campos");
         return;
     }
 
@@ -116,6 +150,14 @@ btnAgregarRuta.addEventListener("click", () => {
     inputConductor.value = "";
     inputHora.value = "";
     inputCiudad.value = "";
+});
+
+document.getElementById("buscador").addEventListener("input", (e) => {
+    const termino = e.target.value.trim().toLowerCase();
+    const filtradas = rutas.filter(r => 
+    r.nombre.toLowerCase().includes(termino) ||
+    r.ciudad.toLowerCase().includes(termino));
+    renderizarRutas(filtradas);
 });
 
 document.addEventListener("rutaCreada", (e) => {
