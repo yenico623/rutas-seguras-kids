@@ -138,9 +138,14 @@ function agregarEstudiante(idRuta, nombre) {
     const ruta = rutas.find(r => r.id == idRuta);
     if (!ruta) return;
     ruta.estudiantes.push({ id: Date.now(), nombre });
+
+    
+
     guardarEnStorage();
     mostrarRutas();
     mostrarNotificacion("Estudiante agregado");
+
+
 }
 
 function eliminarEstudiante(idRuta, idEstudiante) {
@@ -161,6 +166,13 @@ btnAgregarRuta.addEventListener("click", () => {
     if (nombre === "" || conductor === "" || hora === "" || ciudad === "") {
         mostrarNotificacion("Por favor completa todos los campos");
         return;
+    }
+
+    //EVITAR DUPLICADOS
+
+    if (rutas.some(r => r.nombre.toLowerCase() === nombre.toLowerCase())) {
+    mostrarNotificacion("Ya existe una ruta con ese nombre");
+    return;
     }
 
     crearRuta(nombre, conductor, hora, ciudad);
